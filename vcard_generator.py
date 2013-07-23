@@ -1,14 +1,22 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# https://de.wikipedia.org/wiki/VCard
 
-import pyzufall as z
+"""
+Generiert eine VCard mit zufälligen, aber plausiblen Daten.
+
+https://de.wikipedia.org/wiki/VCard
+
+Für die Erzeugung zufälliger Daten wird pyzufall benutzt.
+https://github.com/davidak/pyzufall
+"""
+
+from pyzufall import pyzufall as z
 import random as r
 
 geschlecht = r.randint(0,1)
 
 if geschlecht:
-	vname = z.vorname_m() + z.e16("-" + z.vorname_m())
+	vname = z.vorname_m() + z.e16("-" + z.vorname_m()) #16% Wahrscheinlichkeit ein Doppelname
 else:
 	vname = z.vorname_w() + z.e16("-" + z.vorname_w())
 
@@ -28,7 +36,7 @@ if r.randint(0,1):
 #print("ORG:" + z.firma() + ";Abteilung")
 if r.randint(1,4) == 1:
 	if geschlecht:
-		berufsbez = z.beruf()
+		berufsbez = z.beruf_m()
 	else:
 		berufsbez = z.beruf_w()
 	print("TITLE:" + berufsbez)
@@ -43,4 +51,4 @@ if r.randint(1,8) == 1:
 if r.randint(0,1):
 	print("NOTE:Motto: " + z.sprichwort())
 print("END:VCARD")
-print("")
+print() #Zeilenumbruch
