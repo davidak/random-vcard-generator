@@ -1,54 +1,64 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# -*- coding: utf8 -*-
 
 """
-Generiert eine VCard mit zufälligen, aber plausiblen Daten.
+Der Python Random VCard-Generator generiert VCards mit zufälligen, aber plausiblen Daten.
 
-https://de.wikipedia.org/wiki/VCard
+Copyright (C) 2013 davidak
 
-Für die Erzeugung zufälliger Daten wird pyzufall benutzt.
-https://github.com/davidak/pyzufall
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see {http://www.gnu.org/licenses/}.
 """
 
-from pyzufall import pyzufall as z
+__version__ = '0.4'
+
 import random as r
+from datetime import datetime as date
+from pyzufall.person import Person
 
-geschlecht = r.randint(0,1)
-
-if geschlecht:
-	vname = z.vorname_m() + z.e16("-" + z.vorname_m()) #16% Wahrscheinlichkeit ein Doppelname
-else:
-	vname = z.vorname_w() + z.e16("-" + z.vorname_w())
-
-nname = z.nachname()
-
-bday = str(r.randint(1950,2012)) + "-" + str(r.randint(1,12)).zfill(2) + "-" + str(r.randint(1,31)).zfill(2)
+p = Person()
 
 print("BEGIN:VCARD")
 print("VERSION:3.0")
-print("N:" + nname + ";" + vname)
-print("FN:" + vname + " " + nname)
+print("N:" + p.nachname + ";" + p.vorname + ";;;")
+print("FN:" + p.name)
 #print("NICKNAME:Broho")
-if r.randint(1,5) == 1:
-	print("X-MAIDENNAME:" + z.nachname())
-if r.randint(0,1):
-	print("BDAY;VALUE=DATE:" + bday)
+#if r.randint(1,5) == 1:
+#	print("X-MAIDENNAME:" + z.nachname())
+bday = date.strptime(p.geburtsdatum, "%d.%m.%Y").date()
+print("BDAY;VALUE=DATE:" + date.strftime(bday, "%Y-%m-%d"))
 #print("ORG:" + z.firma() + ";Abteilung")
-if r.randint(1,4) == 1:
-	if geschlecht:
-		berufsbez = z.beruf_m()
-	else:
-		berufsbez = z.beruf_w()
-	print("TITLE:" + berufsbez)
-	print("CATEGORIES:Arbeit")
-else:
-	print("CATEGORIES:" + r.choice(['Ärzte', 'Piratenpartei', 'CCC', 'Freunde', 'Familie']))
-if r.randint(0,2):
-	print("EMAIL;TYPE=INTERNET:" + vname.lower() + "." + nname.lower() + "@" + r.choice(['gmx.de', 'web.de', 't-online.de', 'gmail.com', 'hotmail.com']))
+if r.randint(1,4) == 1: # jeder 5. Kontakt von Arbeit
+	print("TITLE:" + p.beruf)
+print("CATEGORIES:" + r.choice(['Arbeit', 'Piratenpartei', 'CCC', 'Freunde', 'Familie']))
 #print("ADR;TYPE=WORK:;;Plorach Straße 27;Klostein;;46587;Deutschland")
-if r.randint(1,8) == 1:
-	print("URL;TYPE=WORK:http://" + r.choice([vname.lower() + "-" + nname.lower(), nname.lower()]) + r.choice(['.de', '.net', '.org', '.me', '.com']) + "/")
+#print("EMAIL;TYPE=INTERNET:" + p.email)
+#print("URL;TYPE=WORK:" + p.webseite)
+note = ''
 if r.randint(0,1):
-	print("NOTE:Motto: " + z.sprichwort())
+	note += 'Interessen: ' + p.interessen
+if r.randint(0,1):
+	if note:
+		note += '\\n'
+	note += 'Lieblingsfarbe: ' + p.lieblingsfarbe
+if r.randint(0,1):
+	if note:
+		note += '\\n'
+	note += 'Lieblingsessen: ' + p.lieblingsessen
+if r.randint(0,1):
+	if note:
+		note += '\\n\\n'
+	note += 'Motto: ' + p.motto
+print("NOTE:" + note)
 print("END:VCARD")
-print() #Zeilenumbruch
+print('') #Zeilenumbruch
