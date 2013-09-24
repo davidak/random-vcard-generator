@@ -1,65 +1,88 @@
-python-random-vcard-generator
+Python Random VCard-Generator
 =============================
 
-Generiert eine VCard mit zufälligen, aber plausiblen Daten.
+Generiert `VCards <https://de.wikipedia.org/wiki/VCard>`_ mit zufälligen, aber plausiblen Daten.
 
-https://de.wikipedia.org/wiki/VCard
+Die so generierten VCards können z.B. benutzt werden, um Software zu testen, die VCards importiert.
 
-Für die Erzeugung zufälliger Daten wird pyzufall benutzt.
-https://github.com/davidak/pyzufall
+Lizenz
+------
 
-Für die Erzeugung mehrerer VCards in einer Datei kann die Shell benutzt werden.
+Der Python Random VCard-Generator ist Open Source und steht unter der GPL Version 3.
+
+Installation
+------------
+
+Lade `die neuste Version <https://github.com/davidak/python-random-vcard-generator/releases>`_ herunter und entpacke sie, z.B. in deinem Benutzerordner.
+
+Für die Generierung zufälliger Daten wird `pyzufall <https://pyzufall.readthedocs.org/>`_ verwendet.
+
+Wie du **pyzufall** installierst, erfährst du in dessen `Dokumentation <https://pyzufall.readthedocs.org/de/latest/installation.html>`_.
+
+Eine VCard erzeugen
+-------------------
+::
+
+	$ python3 vcard_generator.py > VCard.vcf
+
+5 VCards in einer Datei erzeugen
+--------------------------------
+
+Für die Erzeugung mehrerer VCards in einer Datei kann die `Shell <http://de.wikipedia.org/wiki/Bourne-again_shell>`_ benutzt werden.
 Das Funktioniert auf Unix (z.B. OS X) und Linux.
+::
 
 	for i in {1..5} ; do python3 vcard_generator.py >> Kontakte.vcf ; done
 
-Beispiel
---------
+Natürlich kannst du statt 5 auch 10000 eingeben.
+
+Beispiele
+---------
+::
 
 	BEGIN:VCARD
 	VERSION:3.0
-	N:Reisner;Armin
-	FN:Armin Reisner
-	X-MAIDENNAME:Gerk
-	BDAY;VALUE=DATE:1954-03-24
-	CATEGORIES:Freunde
-	EMAIL;TYPE=INTERNET:armin.reisner@web.de
-	END:VCARD
-	 
-	BEGIN:VCARD
-	VERSION:3.0
-	N:Senn;Anica
-	FN:Anica Senn
-	CATEGORIES:Freunde
-	EMAIL;TYPE=INTERNET:anica.senn@gmail.com
-	URL;TYPE=WORK:http://anica-senn.net/
-	NOTE:Motto: Auf Donner folgt gern Regen.
-	END:VCARD
-	 
-	BEGIN:VCARD
-	VERSION:3.0
-	N:Johannes;Georg
-	FN:Georg Johannes
-	CATEGORIES:Familie
-	EMAIL;TYPE=INTERNET:georg.johannes@web.de
-	END:VCARD
-	 
-	BEGIN:VCARD
-	VERSION:3.0
-	N:Mucha;Sergej
-	FN:Sergej Mucha
-	CATEGORIES:Familie
-	EMAIL;TYPE=INTERNET:sergej.mucha@hotmail.com
-	NOTE:Motto: Betrunkene und Kinder sagen die Wahrheit.
-	END:VCARD
-	 
-	BEGIN:VCARD
-	VERSION:3.0
-	N:Kehrer;Kaan
-	FN:Kaan Kehrer
-	X-MAIDENNAME:Pavlovic
-	TITLE:Vermessungsingenieur
+	N:Ramm;Ulrich;;;
+	FN:Ulrich Ramm
+	BDAY;VALUE=DATE:1966-03-30
 	CATEGORIES:Arbeit
-	EMAIL;TYPE=INTERNET:kaan.kehrer@gmx.de
-	NOTE:Motto: Alle Wege führen nach Rom.
+	NOTE:
+	END:VCARD
+
+	BEGIN:VCARD
+	VERSION:3.0
+	N:Höpfner;Lutz;;;
+	FN:Lutz Höpfner
+	BDAY;VALUE=DATE:1925-03-29
+	CATEGORIES:CCC
+	NOTE:Interessen: Tennis\nLieblingsfarbe: Grün\nLieblingsessen: Pilz mit Thunfischsoße
+	END:VCARD
+
+	BEGIN:VCARD
+	VERSION:3.0
+	N:Joswig;Wilhelm;;;
+	FN:Wilhelm Joswig
+	BDAY;VALUE=DATE:2005-02-04
+	CATEGORIES:Piratenpartei
+	NOTE:Interessen: Fotografie, lesen, telefonieren\nLieblingsessen: Kohl mit Gemüse\n\nMotto: Abwarten und Tee trinken.
+	END:VCARD
+
+	BEGIN:VCARD
+	VERSION:3.0
+	N:Staab;Marina;;;
+	FN:Marina Staab
+	BDAY;VALUE=DATE:1973-11-24
+	TITLE:Notarin
+	CATEGORIES:CCC
+	NOTE:Interessen: Münzen sammeln, Selbstverteidigung
+	END:VCARD
+
+	BEGIN:VCARD
+	VERSION:3.0
+	N:Holle;Paul;;;
+	FN:Paul Holle
+	BDAY;VALUE=DATE:2001-12-24
+	TITLE:Schüler
+	CATEGORIES:Familie
+	NOTE:Lieblingsessen: Rettich mit Ketchup\n\nMotto: Auch Wasser wird zum edlen Tropfen, mischt man es mit Malz und Hopfen!
 	END:VCARD
