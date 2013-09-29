@@ -4,9 +4,9 @@ Changelog
 Version 0.4
 -----------
 
-Veröffentlicht am 
+Veröffentlicht am 24.09.2013
 
-- kompletter Rewrite. benutzt nun die Klasse Person von pyzufall 0.11
+- kompletter Rewrite. benutzt nun die Klasse Person von PyZufall
 - pyzufall git Submodul gelöscht, da es nun über PyPI installierbar ist
 - CHANGELOG hinzugefügt
 - viele kleine Änderungen
@@ -31,4 +31,4 @@ Version 0.1
 
 Veröffentlicht am 23.07.2013
 
-- einfacher VCard-Generator, der pyzufall benutzt
+- einfacher VCard-Generator, der PyZufall benutzt

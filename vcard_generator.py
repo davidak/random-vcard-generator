@@ -20,11 +20,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see {http://www.gnu.org/licenses/}.
 """
 
-__version__ = '0.4'
-
 import random as r
 from datetime import datetime as date
 from pyzufall.person import Person
+
+__version__ = '0.4'
+
+gruppen = ['Arbeit', 'Freunde', 'Familie', 'Sportverein', 'Ärzte', 'Piratenpartei', 'CCC', 'Bekannte aus dem Internet', 'Kegelclub', 'Mafia', 'Expartner', 'Prostituierte']
+
 
 p = Person()
 
@@ -40,7 +43,7 @@ print("BDAY;VALUE=DATE:" + date.strftime(bday, "%Y-%m-%d"))
 #print("ORG:" + z.firma() + ";Abteilung")
 if r.randint(1,4) == 1: # jeder 5. Kontakt von Arbeit
 	print("TITLE:" + p.beruf)
-print("CATEGORIES:" + r.choice(['Arbeit', 'Piratenpartei', 'CCC', 'Freunde', 'Familie']))
+print("CATEGORIES:" + r.choice(gruppen))
 #print("ADR;TYPE=WORK:;;Plorach Straße 27;Klostein;;46587;Deutschland")
 #print("EMAIL;TYPE=INTERNET:" + p.email)
 #print("URL;TYPE=WORK:" + p.webseite)

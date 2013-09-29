@@ -5,19 +5,16 @@ Generiert `VCards <https://de.wikipedia.org/wiki/VCard>`_ mit zufälligen, aber 
 
 Die so generierten VCards können z.B. benutzt werden, um Software zu testen, die VCards importiert.
 
-Lizenz
-------
-
-Der Python Random VCard-Generator ist Open Source und steht unter der GPL Version 3.
+Der Python Random VCard-Generator ist Open Source und steht unter der `GPL Version 3 <http://www.gnu.org/licenses/gpl-3.0.html>`_.
 
 Installation
 ------------
 
 Lade `die neuste Version <https://github.com/davidak/python-random-vcard-generator/releases>`_ herunter und entpacke sie, z.B. in deinem Benutzerordner.
 
-Für die Generierung zufälliger Daten wird `pyzufall <https://pyzufall.readthedocs.org/>`_ verwendet.
+Für die Generierung zufälliger Daten wird `PyZufall <https://pyzufall.readthedocs.org/>`_ verwendet.
 
-Wie du **pyzufall** installierst, erfährst du in dessen `Dokumentation <https://pyzufall.readthedocs.org/de/latest/installation.html>`_.
+Wie du PyZufall installierst, erfährst du in dessen `Dokumentation <https://pyzufall.readthedocs.org/de/latest/installation.html>`_.
 
 Eine VCard erzeugen
 -------------------
