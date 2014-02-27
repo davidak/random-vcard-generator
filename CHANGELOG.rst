@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Version 0.6
+-----------
+
+- jetzt auch mit pip installierbar und auf PyPI gehostet
+- Dokumentation entsprechend angepasst
+
 Version 0.5
 -----------
 
