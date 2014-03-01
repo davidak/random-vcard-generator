@@ -1,40 +1,30 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
+#
+# Copyright (C) 2013 - 2014 davidak
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
 """
-Der Random VCard-Generator generiert VCards mit zufälligen, aber plausiblen Daten.
-
-Copyright (C) 2013, 2014 davidak
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see {http://www.gnu.org/licenses/}.
+Generiert VCards mit zufälligen, aber plausiblen Daten.
 """
 
-import argparse
 import random as r
 from datetime import datetime as date
 from pyzufall.person import Person
 
-__version__ = '0.5'
-
-parser = argparse.ArgumentParser()
-parser.add_argument('-V', '--version', action='version', version='Random VCard-Generator ' + __version__)
-group = parser.add_mutually_exclusive_group()
-group.add_argument("-v", "--verbose", action ="store_true", help="increase output verbosity")
-group.add_argument("-q", "--quiet", action="store_true", help="no output")
-parser.add_argument("-c", "--count", type=int, default=1, help="number of vcards to generate")
-parser.add_argument("-o" ,"--output", default="Kontakte.vcf", help="output filename")
-args = parser.parse_args()
+__version__ = '0.6'
 
 gruppen = ['Arbeit', 'Kunden', 'Freunde', 'Familie', 'Sportverein', 'Ärzte', 'Piratenpartei', 'CCC', 'Bekannte aus dem Internet']
 
@@ -81,8 +71,19 @@ def generate_vcard():
 	return _s
 
 def main():
+	import argparse
+
+	parser = argparse.ArgumentParser()
+	parser.add_argument('-V', '--version', action='version', version='Random VCard-Generator ' + __version__)
+	group = parser.add_mutually_exclusive_group()
+	group.add_argument("-v", "--verbose", action ="store_true", help="increase output verbosity")
+	group.add_argument("-q", "--quiet", action="store_true", help="no output")
+	parser.add_argument("-c", "--count", type=int, default=1, help="number of vcards to generate")
+	parser.add_argument("-o" ,"--output", default="Kontakte.vcf", help="output filename")
+	args = parser.parse_args()
+
 	if not args.quiet:
-		print("VCard-Generator {}\n".format(__version__))
+		print("Random VCard-Generator {}\n".format(__version__))
 
 	output = ''
 
