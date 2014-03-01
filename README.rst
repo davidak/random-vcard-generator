@@ -47,7 +47,9 @@ Eine VCard erzeugen
 
 	$ vcardgen -c 100 -o 100_VCards.vcf
 
-Zudem haben wir hier den Namen der Datei geändert. Statt 100 kannst du natürlich auch 1000000 eingeben.
+Zudem haben wir hier den Namen der Datei geändert.
+
+Statt 100 kannst du natürlich auch 1000000 eingeben. Das dauert dann etwa 8 Minuten auf aktueller Hardware, braucht dabei fast 800 MB RAM und die Datei ist 191 MB groß.
 
 Hilfe
 -----
