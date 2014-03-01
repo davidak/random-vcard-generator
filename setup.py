@@ -3,7 +3,7 @@
 
 from setuptools import setup
 
-from vcardgen import __version__
+from vcardgen.version import __version__
 from vcardgen import __doc__
 
 setup(
@@ -17,9 +17,9 @@ setup(
     platforms='any',
     description=__doc__,
     long_description=open('README.rst').read(),
-    py_modules=['vcardgen'],
+    packages=['vcardgen'],
     entry_points = {
-        'console_scripts': ['vcardgen = vcardgen:main'],
+        'console_scripts': ['vcardgen = vcardgen.vcardgen:main'],
     },
     install_requires=open('requirements.txt').read().splitlines(),
     classifiers=[
