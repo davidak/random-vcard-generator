@@ -19,7 +19,7 @@ setup(
     long_description=open('README.rst').read(),
     packages=['vcardgen'],
     entry_points = {
-        'console_scripts': ['vcardgen = vcardgen.vcardgen:main'],
+        'console_scripts': ['vcardgen = vcardgen.main:main'],
     },
     install_requires=open('requirements.txt').read().splitlines(),
     classifiers=[
