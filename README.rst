@@ -10,7 +10,7 @@ Das in Python geschriebene Kommandozeilen-Tool ist Open Source und steht unter d
 Installation
 ------------
 
-Mit der Paketverwaltung `pip <http://www.pip-installer.org/en/latest/>`_ lassen sich Python-Pakete aus dem `Python Package Index <https://pypi.python.org/pypi>`_ (PyPI) installieren.
+Mit der Paketverwaltung `pip <http://www.pip-installer.org/en/latest/>`_ lassen sich Python-Pakete aus dem `Python Package Index <https://pypi.python.org/pypi/vcardgen/>`_ (PyPI) installieren.
 ::
 
 	$ pip install vcardgen
@@ -35,21 +35,23 @@ Ansonsten nutze `sudo`, um das Programm `pip` für Python 3 mit Administratorrec
 
 	$ sudo pip-3.2 uninstall vcardgen
 
+Um alle installierten Abhängigkeiten zu deinstallieren, füge dem Befehl `PyZufall` und `frogress` getrennt durch Leerzeichen an.
+
 Eine VCard erzeugen
 -------------------
 ::
 
-	$ vcardgen
+	$ vcardgen Kontakt.vcf
 
-100 VCards erzeugen
+Sie wird als `Kontakt.vcf` im aktuellen Verzeichnis gespeichert.
+
+1000 VCards erzeugen
 -------------------
 ::
 
-	$ vcardgen -c 100 -o 100_VCards.vcf
+	$ vcardgen -c 1000 Kontakte.vcf
 
-Zudem haben wir hier den Namen der Datei geändert.
-
-Statt 100 kannst du natürlich auch 1000000 eingeben. Das dauert dann etwa 8 Minuten auf aktueller Hardware, braucht dabei fast 800 MB RAM und die Datei ist 191 MB groß.
+Die Anzahl wird mit dem Parameter `-c` angegeben.
 
 Hilfe
 -----

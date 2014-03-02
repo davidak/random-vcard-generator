@@ -1,8 +1,18 @@
 Changelog
 =========
 
+Version 0.7
+-----------
+
+Veröffentlicht am 02.03.2014
+
+- Fortschrittsanzeige mit vergangener und verbleibender Zeit
+- Benutzung vereinfacht
+
 Version 0.6
 -----------
+
+Veröffentlicht am 01.03.2014
 
 - jetzt auch mit pip installierbar und auf PyPI gehostet
 - Dokumentation entsprechend angepasst
