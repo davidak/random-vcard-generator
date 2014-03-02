@@ -17,6 +17,7 @@
 # along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
 import argparse
+import frogress
 import random as r
 from datetime import datetime as date
 from pyzufall.person import Person
@@ -24,13 +25,12 @@ from .version import __version__
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-V', '--version', action='version', version='Random VCard-Generator ' + __version__)
-group = parser.add_mutually_exclusive_group()
-group.add_argument("-v", "--verbose", action ="store_true", help="increase output verbosity")
-group.add_argument("-q", "--quiet", action="store_true", help="no output")
+parser.add_argument("-q", "--quiet", action="store_true", help="no output on screen")
 parser.add_argument("-c", "--count", type=int, default=1, help="number of vcards to generate")
-parser.add_argument("-o" ,"--output", default="Kontakte.vcf", help="output filename")
+parser.add_argument('filename', help="typical with extension .vcf")
 args = parser.parse_args()
 
+widgets = [frogress.BarWidget, frogress.PercentageWidget, frogress.ProgressWidget('VCard: '), frogress.TimerWidget, frogress.EtaWidget]
 gruppen = ['Arbeit', 'Kunden', 'Freunde', 'Familie', 'Sportverein', 'Ärzte', 'Piratenpartei', 'CCC', 'Bekannte aus dem Internet']
 
 def generate_vcard():
@@ -76,31 +76,20 @@ def generate_vcard():
 	return _s
 
 def main():
-	if not args.quiet:
-		print("Random VCard-Generator {}\n".format(__version__))
-
 	output = ''
 
 	# Angegebene Anzahl an VCards generieren
-	for i in range(args.count):
-		output += generate_vcard()
-		# wenn es länger dauert, Fortschritt anzeigen
-		if args.count > 100:
-			if args.verbose:
-				print("VCard {} von {} generiert".format(i+1, args.count))
-			if not args.verbose and not args.quiet:
-				print('.', end='')
-
-	# Zeilenumbruch nach Punkten
-	if args.count > 100 and not args.verbose and not args.quiet:
-		print()
+	if not args.quiet:
+		for i in frogress.bar(range(args.count), steps=args.count, widgets=widgets):
+			output += generate_vcard()
+		print("\n")
+	else:
+		for i in range(args.count):
+			output += generate_vcard()
 
 	# VCards in Datei schreiben
-	with open(args.output, 'w') as f:
+	with open(args.filename, 'w') as f:
 		f.write(output)
-
-	if not args.quiet:
-		print("Fertig. {} VCard{} generiert und als {} gespeichert.".format(args.count, 's' if args.count > 1 else '', args.output))
 
 if __name__ == "__main__":
 	main()

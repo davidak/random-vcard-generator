@@ -1,1 +1,2 @@
 PyZufall>=0.11
+frogress>=0.9.1
