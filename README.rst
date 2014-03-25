@@ -46,7 +46,7 @@ Eine VCard erzeugen
 Sie wird als `Kontakt.vcf` im aktuellen Verzeichnis gespeichert.
 
 1000 VCards erzeugen
--------------------
+--------------------
 ::
 
 	$ vcardgen -c 1000 Kontakte.vcf
