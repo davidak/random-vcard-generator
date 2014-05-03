@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Version 0.8
+-----------
+
+Veröffentlicht am
+
+- E-Mail, Nickname und Homepage hinzugefügt
+
 Version 0.7
 -----------
 
