@@ -19,7 +19,7 @@
 import argparse
 import frogress
 import random as r
-from datetime import datetime as date
+from datetime import datetime
 from pyzufall.person import Person
 from .version import __version__
 
@@ -40,18 +40,21 @@ def generate_vcard():
 	_s += "VERSION:3.0\n"
 	_s += "N:{};{};;;\n".format(_p.nachname, _p.vorname)
 	_s += "FN:{}\n".format(_p.name)
-	#_s+= "NICKNAME:Broho\n"
-	#if r.randint(1,5) == 1:
-		#_s += "X-MAIDENNAME:" + z.nachname() + "\n"
-	_bday = date.strptime(_p.geburtsdatum, "%d.%m.%Y").date()
+	if r.randint(0,1):
+		_s+= "NICKNAME:{}\n".format(_p.nickname)
+	if _p.geburtsname != _p.nachname:
+		_s += "X-MAIDENNAME:{}\n".format(_p.geburtsname)
+	_bday = datetime.strptime(_p.geburtsdatum, "%d.%m.%Y").date()
 	_s += "BDAY;VALUE=DATE:{}\n".format(_bday)
 	#_s = "ORG:" + z.firma() + ";Abteilung\n"
-	if r.randint(1,4) == 1:
+	if _p.beruf != 'kein' and r.randint(0,1):
 		_s += "TITLE:{}\n".format(_p.beruf)
 	_s += "CATEGORIES:{}\n".format(r.choice(gruppen))
 	#_s += "ADR;TYPE=WORK:;;Plorach Straße 27;Klostein;;46587;Deutschland\n"
-	#_s += "EMAIL;TYPE=INTERNET:" + _p.email + "\n"
-	#_s += "URL;TYPE=WORK:" + _p.webseite + "\n"
+	if _p.alter < 80 and r.randint(1,100) < 85:
+		_s += "EMAIL;TYPE=INTERNET;type=HOME:{}\n".format(_p.email)
+	if _p.alter < 50 and r.randint(0,1):
+		_s += "URL;TYPE=HOME:http\://{}/\n".format(_p.homepage)
 
 	# Notiz zusammensetzen
 	_note = ''
@@ -73,6 +76,8 @@ def generate_vcard():
 		_s += "NOTE:{}\n".format(_note)
 
 	_s += "END:VCARD\n\n"
+
+	del _p
 	return _s
 
 def main():
