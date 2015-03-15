@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 #
-# Copyright (C) 2013 - 2014 davidak
+# Copyright (C) 2013 - 2015 davidak
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ from .version import __version__
 name = "Random VCard-Generator"
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-V', '--version', action='version', version=name + __version__)
+parser.add_argument('-V', '--version', action='version', version=name + ' ' + __version__)
 parser.add_argument("-q", "--quiet", action="store_true", help="no output on screen")
 parser.add_argument("-c", "--count", type=int, default=1, help="number of vcards to generate")
 parser.add_argument('filename', help="typical with extension .vcf")
@@ -74,10 +74,6 @@ def generate_vcard():
 		if _note:
 			_note += '\\n'
 		_note += 'Lieblingsessen: ' + _p.lieblingsessen
-	if r.randint(0,1):
-		if _note:
-			_note += '\\n\\n'
-		_note += 'Motto: ' + _p.motto
 	if _note:
 		_s += "NOTE:{}\n".format(_note)
 
