@@ -5,7 +5,7 @@ Generiert `VCards <https://de.wikipedia.org/wiki/VCard>`_ mit zufälligen, aber 
 
 Die so generierten VCards können z.B. benutzt werden, um Software zu testen, die VCards importiert.
 
-Das in Python geschriebene Kommandozeilen-Tool ist Open Source und steht unter der `GPL Version 3 <http://www.gnu.org/licenses/gpl-3.0.html>`_.
+Das in Python geschriebene Kommandozeilen-Tool ist Open Source und steht unter der `GPLv3 <http://www.gnu.org/licenses/gpl-3.0.html>`_.
 
 Installation
 ------------
@@ -15,7 +15,7 @@ Mit der Paketverwaltung `pip <http://www.pip-installer.org/en/latest/>`_ lassen 
 
 	# pip install vcardgen
 
-Bitte beachte, dass vcardgen nur für Python 3 entwickelt wird und pip für diese Version gestartet werden muss. Zudem braucht man für die Installation neuer Pakete Administratorrechte, die man sich auch mit sudo holen kann.
+Bitte beachte, dass vcardgen nur für Python 3 entwickelt wird und pip für diese Version gestartet werden muss. Zudem braucht man für die Installation neuer Pakete Administratorrechte, die man sich mit sudo holen kann.
 
 Eine VCard erzeugen
 -------------------

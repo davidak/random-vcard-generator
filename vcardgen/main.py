@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf8 -*-
 #
 # Copyright (C) 2013 - 2014 davidak
@@ -23,8 +23,10 @@ from datetime import datetime
 from pyzufall.person import Person
 from .version import __version__
 
+name = "Random VCard-Generator"
+
 parser = argparse.ArgumentParser()
-parser.add_argument('-V', '--version', action='version', version='Random VCard-Generator ' + __version__)
+parser.add_argument('-V', '--version', action='version', version=name + __version__)
 parser.add_argument("-q", "--quiet", action="store_true", help="no output on screen")
 parser.add_argument("-c", "--count", type=int, default=1, help="number of vcards to generate")
 parser.add_argument('filename', help="typical with extension .vcf")
@@ -38,21 +40,25 @@ def generate_vcard():
 
 	_s = "BEGIN:VCARD\n"
 	_s += "VERSION:3.0\n"
-	_s += "N:{};{};;;\n".format(_p.nachname, _p.vorname)
+	_s += "PRODID:-//davidak//{} {}//DE\n".format(name, __version__)
 	_s += "FN:{}\n".format(_p.name)
+	_s += "N:{};{};;;\n".format(_p.nachname, _p.vorname)
 	if r.randint(0,1):
 		_s+= "NICKNAME:{}\n".format(_p.nickname)
 	if _p.geburtsname != _p.nachname:
 		_s += "X-MAIDENNAME:{}\n".format(_p.geburtsname)
 	_bday = datetime.strptime(_p.geburtsdatum, "%d.%m.%Y").date()
-	_s += "BDAY;VALUE=DATE:{}\n".format(_bday)
+	_s += "BDAY:{}\n".format(_bday)
+	if r.randint(0,1):
+		_s += "BIRTHPLACE:{}\n".format(_p.geburtsort)
 	#_s = "ORG:" + z.firma() + ";Abteilung\n"
 	if _p.beruf != 'kein' and r.randint(0,1):
 		_s += "TITLE:{}\n".format(_p.beruf)
 	_s += "CATEGORIES:{}\n".format(r.choice(gruppen))
+	_s += "TZ:+0100\n"
 	#_s += "ADR;TYPE=WORK:;;Plorach Straße 27;Klostein;;46587;Deutschland\n"
 	if _p.alter < 80 and r.randint(1,100) < 85:
-		_s += "EMAIL;TYPE=INTERNET;type=HOME:{}\n".format(_p.email)
+		_s += "EMAIL;TYPE=INTERNET;TYPE=HOME;TYPE=PREF:{}\n".format(_p.email)
 	if _p.alter < 50 and r.randint(0,1):
 		_s += "URL;TYPE=HOME:http\://{}/\n".format(_p.homepage)
 

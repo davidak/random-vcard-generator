@@ -1,2 +1,3 @@
 PyZufall>=0.13
 frogress>=0.9.1
+argparse
