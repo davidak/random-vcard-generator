@@ -60,7 +60,7 @@ def generate_vcard():
 	if _p.alter < 80 and r.randint(1,100) < 85:
 		_s += "EMAIL;TYPE=INTERNET;TYPE=HOME;TYPE=PREF:{}\n".format(_p.email)
 	if _p.alter < 50 and r.randint(0,1):
-		_s += "URL;TYPE=HOME:http\://{}/\n".format(_p.homepage)
+		_s += "URL;TYPE=HOME:{}\n".format(_p.homepage)
 
 	# Notiz zusammensetzen
 	_note = ''
