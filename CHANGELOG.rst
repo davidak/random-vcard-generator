@@ -4,9 +4,13 @@ Changelog
 Version 0.8
 -----------
 
-Veröffentlicht am
+Veröffentlicht am 15.03.2015
 
+- läuft jetzt auch mit Python 2.7
+- Geburtsname und Geburtsort hinzugefügt
 - E-Mail, Nickname und Homepage hinzugefügt
+- Kennung der Software, die die VCard erzeugt hat, hinzugefügt
+- Motto entfernt, unrealistisch
 
 Version 0.7
 -----------
