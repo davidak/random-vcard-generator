@@ -3,7 +3,7 @@ Random VCard-Generator
 
 Generiert `VCards <https://de.wikipedia.org/wiki/VCard>`_ mit zufälligen, aber plausiblen Daten.
 
-Diese VCards können z.B. benutzt werden, um Software zu testen, die VCards importiert oder verarbeitet.
+Diese können z.B. genutzt werden, um Software zu testen, die VCards importiert oder verarbeitet.
 
 Das in Python geschriebene Kommandozeilen-Tool ist Open Source und steht unter der `GPLv3 <http://www.gnu.org/licenses/gpl-3.0.html>`_.
 
@@ -44,10 +44,14 @@ Beispiel
 
 	BEGIN:VCARD
 	VERSION:3.0
-	N:Metzler;Lorena;;;
-	FN:Lorena Metzler
-	BDAY;VALUE=DATE:1935-05-03
-	TITLE:Rentnerin
-	CATEGORIES:Sportverein
-	NOTE:Lieblingsessen: Champignon mit Soße\n\nMotto: Lachen ist die beste Medizin.
+	PRODID:-//davidak//Random VCard-Generator 0.8//DE
+	FN:Sara Hufnagel
+	N:Hufnagel;Sara;;;
+	BDAY:2003-11-02
+	BIRTHPLACE:Luckau
+	CATEGORIES:Freunde
+	TZ:+0100
+	EMAIL;TYPE=INTERNET;TYPE=HOME;TYPE=PREF:sarhuf@yahoo.com.au
+	URL;TYPE=HOME:http://sara.hufnagel.org/
+	NOTE:Lieblingsfarbe: Grau
 	END:VCARD
