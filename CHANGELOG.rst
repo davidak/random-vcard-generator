@@ -1,6 +1,20 @@
 Changelog
 =========
 
+Version 0.8.2
+-------------
+
+Veröffentlicht am 7.07.2015
+
+- fix for install with python3
+
+Version 0.8.1
+-------------
+
+Veröffentlicht am 15.03.2015
+
+- fix for package on pypi
+
 Version 0.8
 -----------
 
