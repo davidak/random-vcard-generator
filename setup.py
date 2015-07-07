@@ -23,7 +23,7 @@ setup(
         'console_scripts': ['vcardgen = vcardgen.main:main'],
     },
     install_requires=[
-        'PyZufall>=0.13',
+        'PyZufall>=0.13.1',
         'frogress>=0.9.1',
         'argparse',
     ],
