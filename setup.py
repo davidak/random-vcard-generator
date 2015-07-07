@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import codecs
 from setuptools import setup
 
 from vcardgen.version import __version__
@@ -13,15 +14,19 @@ setup(
     license='GPLv3',
     author='davidak',
     author_email='post@davidak.de',
-    keywords = ('random vcard generator test import export'),
+    keywords=('random vcard generator test import export'),
     platforms='any',
     description=__doc__,
-    long_description=open('README.rst', encoding='utf-8').read(),
+    long_description=codecs.open('README.rst', 'r', 'utf-8').read(),
     packages=['vcardgen'],
     entry_points = {
         'console_scripts': ['vcardgen = vcardgen.main:main'],
     },
-    install_requires=open('requirements.txt').read().splitlines(),
+    install_requires=[
+        'PyZufall>=0.13',
+        'frogress>=0.9.1',
+        'argparse',
+    ],
     classifiers=[
         #'Development Status :: 1 - Planning',
         #'Development Status :: 2 - Pre-Alpha',
