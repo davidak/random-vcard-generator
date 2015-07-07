@@ -16,7 +16,7 @@ setup(
     keywords = ('random vcard generator test import export'),
     platforms='any',
     description=__doc__,
-    long_description=open('README.rst').read(),
+    long_description=open('README.rst', encoding='utf-8').read(),
     packages=['vcardgen'],
     entry_points = {
         'console_scripts': ['vcardgen = vcardgen.main:main'],
