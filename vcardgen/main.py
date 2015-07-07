@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
+import codecs
 import argparse
 import frogress
 import random as r
@@ -95,7 +96,7 @@ def main():
 			output += generate_vcard()
 
 	# VCards in Datei schreiben
-	with open(args.filename, 'w') as f:
+	with codecs.open(args.filename, 'w', 'utf-8') as f:
 		f.write(output)
 
 if __name__ == "__main__":
