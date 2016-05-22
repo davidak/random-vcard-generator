@@ -9,8 +9,7 @@ python:
   - "pypy"
   - "pypy3"
 sudo: false
-install:
-  - pip install -r requirements.txt
+install: true
 script:
 #  - python setup.py nosetests
   - python setup.py install
