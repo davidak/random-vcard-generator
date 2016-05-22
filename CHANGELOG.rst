@@ -1,19 +1,26 @@
 Changelog
 =========
 
+Version 0.8.3
+-------------
+
+Veröffentlicht am 
+
+- Unicode Fehler behoben, Kompatibilität mit Python 2/3 verbessert
+
 Version 0.8.2
 -------------
 
 Veröffentlicht am 7.07.2015
 
-- fix for install with python3
+- Fehler bei Installation mit Python 3 behoben
 
 Version 0.8.1
 -------------
 
 Veröffentlicht am 15.03.2015
 
-- fix for package on pypi
+- Fehler in Paket auf PyPI behoben
 
 Version 0.8
 -----------
