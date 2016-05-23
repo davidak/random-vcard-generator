@@ -1,6 +1,12 @@
 Random VCard-Generator
 ======================
 
+.. image:: https://travis-ci.org/davidak/random-vcard-generator.svg?branch=master
+    :target: https://travis-ci.org/davidak/random-vcard-generator
+
+.. image:: https://badge.fury.io/py/vcardgen.svg
+    :target: https://badge.fury.io/py/vcardgen
+
 Generiert `VCards <https://de.wikipedia.org/wiki/VCard>`_ mit zufälligen, aber plausiblen Daten.
 
 Diese können z.B. genutzt werden, um Software zu testen, die VCards importiert oder verarbeitet.
