@@ -7,6 +7,7 @@ Version 0.8.3
 Veröffentlicht am 
 
 - Unicode Fehler behoben, Kompatibilität mit Python 2/3 verbessert
+- Python 3.2 wird nicht mehr unterstützt
 
 Version 0.8.2
 -------------
