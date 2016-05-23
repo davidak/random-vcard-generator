@@ -26,6 +26,7 @@ setup(
         'PyZufall>=0.13.1',
         'frogress>=0.9.1',
         'argparse',
+        'future'
     ],
     classifiers=[
         #'Development Status :: 1 - Planning',
