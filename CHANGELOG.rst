@@ -4,7 +4,7 @@ Changelog
 Version 0.8.3
 -------------
 
-Veröffentlicht am 
+Veröffentlicht am 23.05.2016
 
 - Unicode Fehler behoben, Kompatibilität mit Python 2/3 verbessert
 - Python 3.2 wird nicht mehr unterstützt
