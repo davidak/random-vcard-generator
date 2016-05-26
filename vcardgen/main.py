@@ -19,7 +19,12 @@
 from __future__ import (absolute_import, division, print_function, unicode_literals)
 from builtins import *
 
-import codecs
+import sys
+if sys.version_info[0] == 2:
+    import codecs
+    UTF8Writer = codecs.getwriter('utf8')
+    sys.stdout = UTF8Writer(sys.stdout)
+
 import argparse
 import frogress
 import random as r
@@ -98,8 +103,8 @@ if __name__ == "__main__":
                 output += generate_vcard()
 
         # VCards in Datei schreiben
-        with codecs.open(args.file, 'w', 'utf-8') as f:
+        with open(args.file, mode='w', encoding='utf-8') as f:
             f.write(output)
     else:
         for i in range(args.count):
-            print(generate_vcard())
+            print(generate_vcard(), end='')
