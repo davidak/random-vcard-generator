@@ -40,67 +40,67 @@ widgets = [frogress.BarWidget, frogress.PercentageWidget, frogress.ProgressWidge
 gruppen = ['Arbeit', 'Kunden', 'Freunde', 'Familie', 'Sportverein', 'Ärzte', 'Piratenpartei', 'CCC', 'Bekannte aus dem Internet']
 
 def generate_vcard():
-	_p = Person()
+    _p = Person()
 
-	_s = "BEGIN:VCARD\n"
-	_s += "VERSION:3.0\n"
-	_s += "PRODID:-//davidak//{} {}//DE\n".format(name, __version__)
-	_s += "FN:{}\n".format(_p.name)
-	_s += "N:{};{};;;\n".format(_p.nachname, _p.vorname)
-	if r.randint(0,1):
-		_s+= "NICKNAME:{}\n".format(_p.nickname)
-	if _p.geburtsname != _p.nachname:
-		_s += "X-MAIDENNAME:{}\n".format(_p.geburtsname)
-	_bday = datetime.strptime(_p.geburtsdatum, "%d.%m.%Y").date()
-	_s += "BDAY:{}\n".format(_bday)
-	if r.randint(0,1):
-		_s += "BIRTHPLACE:{}\n".format(_p.geburtsort)
-	#_s = "ORG:" + z.firma() + ";Abteilung\n"
-	if _p.beruf != 'kein' and r.randint(0,1):
-		_s += "TITLE:{}\n".format(_p.beruf)
-	_s += "CATEGORIES:{}\n".format(r.choice(gruppen))
-	_s += "TZ:+0100\n"
-	#_s += "ADR;TYPE=WORK:;;Plorach Straße 27;Klostein;;46587;Deutschland\n"
-	if _p.alter < 80 and r.randint(1,100) < 85:
-		_s += "EMAIL;TYPE=INTERNET;TYPE=HOME;TYPE=PREF:{}\n".format(_p.email)
-	if _p.alter < 50 and r.randint(0,1):
-		_s += "URL;TYPE=HOME:{}\n".format(_p.homepage)
+    _s = "BEGIN:VCARD\n"
+    _s += "VERSION:3.0\n"
+    _s += "PRODID:-//davidak//{} {}//DE\n".format(name, __version__)
+    _s += "FN:{}\n".format(_p.name)
+    _s += "N:{};{};;;\n".format(_p.nachname, _p.vorname)
+    if r.randint(0,1):
+        _s+= "NICKNAME:{}\n".format(_p.nickname)
+    if _p.geburtsname != _p.nachname:
+        _s += "X-MAIDENNAME:{}\n".format(_p.geburtsname)
+    _bday = datetime.strptime(_p.geburtsdatum, "%d.%m.%Y").date()
+    _s += "BDAY:{}\n".format(_bday)
+    if r.randint(0,1):
+        _s += "BIRTHPLACE:{}\n".format(_p.geburtsort)
+    #_s = "ORG:" + z.firma() + ";Abteilung\n"
+    if _p.beruf != 'kein' and r.randint(0,1):
+        _s += "TITLE:{}\n".format(_p.beruf)
+    _s += "CATEGORIES:{}\n".format(r.choice(gruppen))
+    _s += "TZ:+0100\n"
+    #_s += "ADR;TYPE=WORK:;;Plorach Straße 27;Klostein;;46587;Deutschland\n"
+    if _p.alter < 80 and r.randint(1,100) < 85:
+        _s += "EMAIL;TYPE=INTERNET;TYPE=HOME;TYPE=PREF:{}\n".format(_p.email)
+    if _p.alter < 50 and r.randint(0,1):
+        _s += "URL;TYPE=HOME:{}\n".format(_p.homepage)
 
-	# Notiz zusammensetzen
-	_note = ''
-	if r.randint(0,1):
-		_note += 'Interessen: ' + _p.interessen
-	if r.randint(0,1):
-		if _note:
-			_note += '\\n'
-		_note += 'Lieblingsfarbe: ' + _p.lieblingsfarbe
-	if r.randint(0,1):
-		if _note:
-			_note += '\\n'
-		_note += 'Lieblingsessen: ' + _p.lieblingsessen
-	if _note:
-		_s += "NOTE:{}\n".format(_note)
+    # Notiz zusammensetzen
+    _note = ''
+    if r.randint(0,1):
+        _note += 'Interessen: ' + _p.interessen
+    if r.randint(0,1):
+        if _note:
+            _note += '\\n'
+        _note += 'Lieblingsfarbe: ' + _p.lieblingsfarbe
+    if r.randint(0,1):
+        if _note:
+            _note += '\\n'
+        _note += 'Lieblingsessen: ' + _p.lieblingsessen
+    if _note:
+        _s += "NOTE:{}\n".format(_note)
 
-	_s += "END:VCARD\n\n"
+    _s += "END:VCARD\n\n"
 
-	del _p
-	return _s
+    del _p
+    return _s
 
 def main():
-	output = ''
+    output = ''
 
-	# Angegebene Anzahl an VCards generieren
-	if not args.quiet:
-		for i in frogress.bar(range(args.count), steps=args.count, widgets=widgets):
-			output += generate_vcard()
-		print("\n")
-	else:
-		for i in range(args.count):
-			output += generate_vcard()
+    # Angegebene Anzahl an VCards generieren
+    if not args.quiet:
+        for i in frogress.bar(range(args.count), steps=args.count, widgets=widgets):
+            output += generate_vcard()
+        print("\n")
+    else:
+        for i in range(args.count):
+            output += generate_vcard()
 
-	# VCards in Datei schreiben
-	with codecs.open(args.filename, 'w', 'utf-8') as f:
-		f.write(output)
+    # VCards in Datei schreiben
+    with codecs.open(args.filename, 'w', 'utf-8') as f:
+        f.write(output)
 
 if __name__ == "__main__":
-	main()
+    main()
