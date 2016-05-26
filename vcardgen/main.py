@@ -33,7 +33,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-V', '--version', action='version', version=name + ' ' + __version__)
 parser.add_argument("-q", "--quiet", action="store_true", help="no output on screen")
 parser.add_argument("-c", "--count", type=int, default=1, help="number of vcards to generate")
-parser.add_argument('filename', help="typical with extension .vcf")
+parser.add_argument('-f', '--file', help='typical with extension .vcf')
 args = parser.parse_args()
 
 widgets = [frogress.BarWidget, frogress.PercentageWidget, frogress.ProgressWidget('VCard: '), frogress.TimerWidget, frogress.EtaWidget]
@@ -86,21 +86,20 @@ def generate_vcard():
     del _p
     return _s
 
-def main():
-    output = ''
+if __name__ == "__main__":
+    if args.file:
+        output = ''
+        if not args.quiet:
+            for i in frogress.bar(range(args.count), steps=args.count, widgets=widgets):
+                output += generate_vcard()
+            print("\n")
+        else:
+            for i in range(args.count):
+                output += generate_vcard()
 
-    # Angegebene Anzahl an VCards generieren
-    if not args.quiet:
-        for i in frogress.bar(range(args.count), steps=args.count, widgets=widgets):
-            output += generate_vcard()
-        print("\n")
+        # VCards in Datei schreiben
+        with codecs.open(args.file, 'w', 'utf-8') as f:
+            f.write(output)
     else:
         for i in range(args.count):
-            output += generate_vcard()
-
-    # VCards in Datei schreiben
-    with codecs.open(args.filename, 'w', 'utf-8') as f:
-        f.write(output)
-
-if __name__ == "__main__":
-    main()
+            print(generate_vcard())
