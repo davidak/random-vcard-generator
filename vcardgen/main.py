@@ -21,8 +21,8 @@ from builtins import *
 
 import sys
 if sys.version_info[0] == 2:
-    import codecs
-    UTF8Writer = codecs.getwriter('utf8')
+    from kitchen.text.converters import getwriter
+    UTF8Writer = getwriter('utf8')
     sys.stdout = UTF8Writer(sys.stdout)
 
 import argparse

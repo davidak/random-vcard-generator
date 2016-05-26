@@ -1,11 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import sys
 import codecs
 from setuptools import setup
 
 from vcardgen.version import __version__
 from vcardgen import __doc__
+
+install_requires=[
+    'PyZufall>=0.13.1',
+    'frogress>=0.9.1',
+    'argparse',
+    'future'
+]
+if sys.version_info[0] == 2:
+    install_requires.append('kitchen')
 
 setup(
     name='vcardgen',
@@ -22,12 +32,7 @@ setup(
     entry_points = {
         'console_scripts': ['vcardgen = vcardgen.main:main'],
     },
-    install_requires=[
-        'PyZufall>=0.13.1',
-        'frogress>=0.9.1',
-        'argparse',
-        'future'
-    ],
+    install_requires=install_requires,
     classifiers=[
         #'Development Status :: 1 - Planning',
         #'Development Status :: 2 - Pre-Alpha',
