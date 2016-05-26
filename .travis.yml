@@ -13,8 +13,9 @@ install: true
 script:
 #  - python setup.py nosetests
   - python setup.py install
-  - vcardgen -c 3 Kontakt.vcf
+  - vcardgen -c 2 -f Kontakt.vcf
   - cat Kontakt.vcf
+  - vcardgen
 #after_success: coveralls
 notifications:
   email:
