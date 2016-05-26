@@ -91,7 +91,7 @@ def generate_vcard():
     del _p
     return _s
 
-if __name__ == "__main__":
+def main():
     if args.file:
         output = ''
         if not args.quiet:
@@ -108,3 +108,6 @@ if __name__ == "__main__":
     else:
         for i in range(args.count):
             print(generate_vcard(), end='')
+
+if __name__ == "__main__":
+    main()

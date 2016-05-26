@@ -30,7 +30,7 @@ setup(
     long_description=codecs.open('README.rst', 'r', 'utf-8').read(),
     packages=['vcardgen'],
     entry_points = {
-        'console_scripts': ['vcardgen = vcardgen.main'],
+        'console_scripts': ['vcardgen = vcardgen.main:main'],
     },
     install_requires=install_requires,
     classifiers=[
