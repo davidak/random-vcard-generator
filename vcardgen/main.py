@@ -97,14 +97,18 @@ def main():
         if not args.quiet:
             for i in frogress.bar(range(args.count), steps=args.count, widgets=widgets):
                 output += generate_vcard()
+                if (i % 500) == 0 or i == args.count - 1: # schreibe immer 500 vcards in datei
+                    with open(args.file, mode='a', encoding='utf-8') as f:
+                        f.write(output)
+                        output = ''
             print("\n")
         else:
             for i in range(args.count):
                 output += generate_vcard()
-
-        # VCards in Datei schreiben
-        with open(args.file, mode='w', encoding='utf-8') as f:
-            f.write(output)
+                if (i % 500) == 0 or i == args.count - 1: # schreibe immer 500 vcards in datei
+                    with open(args.file, mode='a', encoding='utf-8') as f:
+                        f.write(output)
+                        output = ''
     else:
         for i in range(args.count):
             print(generate_vcard(), end='')
