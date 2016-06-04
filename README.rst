@@ -22,11 +22,14 @@ Installation
 
 Für die Installation brauchst du Admin-Rechte. Wenn du nicht root bist benutze sudo oder wende dich an den Administrator.
 
+Kompatibel mit Python 2.7, Python 3.3+ sowie `PyPy <http://pypy.org/>`_.
+
 Eine VCard erzeugen
 -------------------
+
 ::
 
-	$ vcardgen Kontakt.vcf
+	$ vcardgen -f Kontakt.vcf
 
 Sie wird als Kontakt.vcf im aktuellen Verzeichnis gespeichert.
 
@@ -34,7 +37,7 @@ Sie wird als Kontakt.vcf im aktuellen Verzeichnis gespeichert.
 --------------------
 ::
 
-	$ vcardgen -c 1000 Kontakte.vcf
+	$ vcardgen -c 1000 -f Kontakte.vcf
 
 Die Anzahl wird mit dem Parameter -c angegeben.
 
