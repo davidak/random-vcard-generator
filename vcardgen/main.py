@@ -41,44 +41,41 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-V', '--version', action='version', version=name + ' ' + __version__)
 parser.add_argument("-q", "--quiet", action="store_true", help="no output on screen")
 parser.add_argument("-c", "--count", type=int, default=1, help="number of vcards to generate")
-parser.add_argument('-f', '--file', help='typical with extension .vcf')
+parser.add_argument('-f', '--file', help='filename or path, typical with .vcf extension')
 args = parser.parse_args()
 
-# http://stackoverflow.com/a/1094933/2611995
+widgets = [frogress.BarWidget, frogress.PercentageWidget, frogress.ProgressWidget('VCard: '), frogress.TimerWidget, frogress.EtaWidget]
+gruppen = ['Arbeit', 'Kunden', 'Freunde', 'Familie', 'Sportverein', 'Ärzte', 'Piratenpartei', 'CCC', 'Bekannte aus dem Internet']
+
+
 def sizeof_fmt(num, suffix='B'):
+    """Dateigröße menschenlesbar ausgeben"""
     for unit in ['','Ki','Mi','Gi','Ti','Pi','Ei','Zi']:
         if abs(num) < 1024.0:
             return "%3.2f %s%s" % (num, unit, suffix)
         num /= 1024.0
     return "%.2f %s%s" % (num, 'Yi', suffix)
 
-def fmtd(v):
-    v, l = str(v), []
-    while v:
-        v, l[:0] = v[:-3], [ v[-3:]]
-    return '.'.join(l)
 
-def get_free_space(dirname):
+def get_free_space(path):
     """Gibt den freien Speicherplatz im angegebenen Verzeichnis in Bytes zurück"""
     if platform.system() == 'Windows':
         free_bytes = ctypes.c_ulonglong(0)
-        ctypes.windll.kernel32.GetDiskFreeSpaceExW(ctypes.c_wchar_p(dirname), None, None, ctypes.pointer(free_bytes))
+        ctypes.windll.kernel32.GetDiskFreeSpaceExW(ctypes.c_wchar_p(path), None, None, ctypes.pointer(free_bytes))
         return free_bytes.value
     else:
-        st = statvfs(dirname)
+        st = statvfs(path)
         return st.f_bavail * st.f_frsize
 
-# freien Speicherplatz prüfen
-if args.file:
+
+def check_available_storage():
     vcard_size = 312  # Bytes
     total_vcard_size = vcard_size * args.count
     free_space = get_free_space(path.dirname(path.realpath(args.file)))
     if total_vcard_size > free_space:
-        print('Fehler: {} VCards benötigen {} freien Speicherplatz, es sind aber nur {} verfügbar.'.format(fmtd(args.count), sizeof_fmt(total_vcard_size), sizeof_fmt(free_space)))
+        print('Fehler: {} Speicherplatz benötigt, aber nur {} frei'.format(sizeof_fmt(total_vcard_size), sizeof_fmt(free_space)))
         sys.exit(1)
 
-widgets = [frogress.BarWidget, frogress.PercentageWidget, frogress.ProgressWidget('VCard: '), frogress.TimerWidget, frogress.EtaWidget]
-gruppen = ['Arbeit', 'Kunden', 'Freunde', 'Familie', 'Sportverein', 'Ärzte', 'Piratenpartei', 'CCC', 'Bekannte aus dem Internet']
 
 def generate_vcard():
     _p = Person()
@@ -127,8 +124,10 @@ def generate_vcard():
     del _p
     return _s
 
+
 def main():
     if args.file:
+        check_available_storage()
         output = ''
         if not args.quiet:
             for i in frogress.bar(range(args.count), steps=args.count, widgets=widgets):
