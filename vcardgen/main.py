@@ -19,18 +19,21 @@
 from __future__ import (absolute_import, division, print_function, unicode_literals)
 from builtins import *
 
+from os import (statvfs, path)
 import sys
-if sys.version_info[0] == 2:
-    from kitchen.text.converters import getwriter
-    UTF8Writer = getwriter('utf8')
-    sys.stdout = UTF8Writer(sys.stdout)
-
+import ctypes
+import platform
 import argparse
 import frogress
 import random as r
 from datetime import datetime
 from pyzufall.person import Person
 from .version import __version__
+
+if sys.version_info[0] == 2:
+    from kitchen.text.converters import getwriter
+    UTF8Writer = getwriter('utf8')
+    sys.stdout = UTF8Writer(sys.stdout)
 
 name = "Random VCard-Generator"
 
@@ -40,6 +43,39 @@ parser.add_argument("-q", "--quiet", action="store_true", help="no output on scr
 parser.add_argument("-c", "--count", type=int, default=1, help="number of vcards to generate")
 parser.add_argument('-f', '--file', help='typical with extension .vcf')
 args = parser.parse_args()
+
+# http://stackoverflow.com/a/1094933/2611995
+def sizeof_fmt(num, suffix='B'):
+    for unit in ['','Ki','Mi','Gi','Ti','Pi','Ei','Zi']:
+        if abs(num) < 1024.0:
+            return "%3.2f %s%s" % (num, unit, suffix)
+        num /= 1024.0
+    return "%.2f %s%s" % (num, 'Yi', suffix)
+
+def fmtd(v):
+    v, l = str(v), []
+    while v:
+        v, l[:0] = v[:-3], [ v[-3:]]
+    return '.'.join(l)
+
+def get_free_space(dirname):
+    """Gibt den freien Speicherplatz im angegebenen Verzeichnis in Bytes zurück"""
+    if platform.system() == 'Windows':
+        free_bytes = ctypes.c_ulonglong(0)
+        ctypes.windll.kernel32.GetDiskFreeSpaceExW(ctypes.c_wchar_p(dirname), None, None, ctypes.pointer(free_bytes))
+        return free_bytes.value
+    else:
+        st = statvfs(dirname)
+        return st.f_bavail * st.f_frsize
+
+# freien Speicherplatz prüfen
+if args.file:
+    vcard_size = 312  # Bytes
+    total_vcard_size = vcard_size * args.count
+    free_space = get_free_space(path.dirname(path.realpath(args.file)))
+    if total_vcard_size > free_space:
+        print('Fehler: {} VCards benötigen {} freien Speicherplatz, es sind aber nur {} verfügbar.'.format(fmtd(args.count), sizeof_fmt(total_vcard_size), sizeof_fmt(free_space)))
+        sys.exit(1)
 
 widgets = [frogress.BarWidget, frogress.PercentageWidget, frogress.ProgressWidget('VCard: '), frogress.TimerWidget, frogress.EtaWidget]
 gruppen = ['Arbeit', 'Kunden', 'Freunde', 'Familie', 'Sportverein', 'Ärzte', 'Piratenpartei', 'CCC', 'Bekannte aus dem Internet']
