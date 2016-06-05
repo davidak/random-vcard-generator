@@ -44,6 +44,9 @@ parser.add_argument("-c", "--count", type=int, default=1, help="number of vcards
 parser.add_argument('-f', '--file', help='filename or path, typical with .vcf extension')
 args = parser.parse_args()
 
+vcard_size = 312  # Bytes
+total_vcard_size = vcard_size * args.count
+
 widgets = [frogress.BarWidget, frogress.PercentageWidget, frogress.ProgressWidget('VCard: '), frogress.TimerWidget, frogress.EtaWidget]
 gruppen = ['Arbeit', 'Kunden', 'Freunde', 'Familie', 'Sportverein', 'Ärzte', 'Piratenpartei', 'CCC', 'Bekannte aus dem Internet']
 
@@ -69,8 +72,6 @@ def get_free_space(path):
 
 
 def check_available_storage():
-    vcard_size = 312  # Bytes
-    total_vcard_size = vcard_size * args.count
     free_space = get_free_space(path.dirname(path.realpath(args.file)))
     if total_vcard_size > free_space:
         print('Fehler: {} Speicherplatz benötigt, aber nur {} frei'.format(sizeof_fmt(total_vcard_size), sizeof_fmt(free_space)))
@@ -130,6 +131,8 @@ def main():
         check_available_storage()
         output = ''
         if not args.quiet:
+            print('{} {}'.format(name, __version__))
+            print('Generiere {} ({})'.format(args.file, sizeof_fmt(total_vcard_size)))
             for i in frogress.bar(range(args.count), steps=args.count, widgets=widgets):
                 output += generate_vcard()
                 if (i % 250) == 0 or i == args.count - 1: # schreibe immer 250 vcards in datei
@@ -147,6 +150,7 @@ def main():
     else:
         for i in range(args.count):
             print(generate_vcard(), end='')
+
 
 if __name__ == "__main__":
     main()
