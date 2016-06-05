@@ -1,6 +1,19 @@
 Changelog
 =========
 
+Version 0.9
+-----------
+
+Veröffentlicht am 05.06.2016
+
+- Parameter -f ist nun optional, Ausgabe in Terminal möglich
+- Weitere Encoding-Probleme mit Python 2.7 behoben
+- Problem beim Speichern von mehr als 6.000.000 VCards behoben
+- Performance enorm gesteigert (nur noch 4,7 statt 19 Sekunden für 10.000 VCards)
+- RAM-Nutzung verringert auf 6 MB (vorher je nach Anzahl VCards, 100 MB bei 10.000)
+- Prüfung, ob genug Speicherplatz verfügbar ist
+- Spätere Dateigröße anzeigen
+
 Version 0.8.3
 -------------
 
@@ -12,7 +25,7 @@ Veröffentlicht am 23.05.2016
 Version 0.8.2
 -------------
 
-Veröffentlicht am 7.07.2015
+Veröffentlicht am 07.07.2015
 
 - Fehler bei Installation mit Python 3 behoben
 
